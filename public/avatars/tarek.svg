@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <defs>
+    <radialGradient id="bg-tarek" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#2b170a" />
+      <stop offset="100%" stop-color="#0d0603" />
+    </radialGradient>
+    <linearGradient id="visor-tarek" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffedd5" stop-opacity="0.95" />
+      <stop offset="35%" stop-color="#c2410c" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#9a3412" stop-opacity="1" />
+    </linearGradient>
+    <linearGradient id="suit-tarek" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#361f14" />
+      <stop offset="100%" stop-color="#0a0807" />
+    </linearGradient>
+    <filter id="glow-tarek" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Fundo Cósmico Marciano -->
+  <rect width="240" height="240" rx="36" fill="url(#bg-tarek)" />
+  
+  <!-- Anel Orbital Externo de Telemetria -->
+  <circle cx="120" cy="120" r="108" fill="none" stroke="#ea580c" stroke-opacity="0.3" stroke-width="2" stroke-dasharray="4 8" />
+  <circle cx="120" cy="120" r="114" fill="none" stroke="#fb923c" stroke-opacity="0.2" stroke-width="1" />
+
+  <!-- Traje Espacial / Ombros de Titânio -->
+  <path d="M28,240 C35,185 75,166 120,166 C165,166 205,185 212,240 Z" fill="url(#suit-tarek)" />
+  <path d="M68,185 L120,195 L172,185 L177,240 L63,240 Z" fill="#361f14" opacity="0.75" />
+  
+  <!-- Gola Pressurizada com Anel de Bloqueio -->
+  <ellipse cx="120" cy="166" rx="46" ry="16" fill="#171413" stroke="#ea580c" stroke-width="2" />
+  
+  <!-- Capacete Marciano Futurista -->
+  <ellipse cx="120" cy="106" rx="60" ry="64" fill="#181514" stroke="#ea580c" stroke-width="2.5" />
+
+  <!-- Viseira Holográfica de Alta Densidade -->
+  <path d="M72,94 C72,66 92,58 120,58 C148,58 168,66 168,94 C168,122 148,138 120,138 C92,138 72,122 72,94 Z" 
+        fill="url(#visor-tarek)" 
+        filter="url(#glow-tarek)" />
+
+  <!-- Linha de Reflexo de Luz Estelar na Viseira -->
+  <path d="M86,76 C100,68 140,68 154,78 C142,72 102,72 86,76 Z" fill="#ffffff" opacity="0.8" />
+  <path d="M80,92 C95,88 120,88 138,91" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.45" />
+
+  <!-- Display HUD na Viseira -->
+  <text x="120" y="115" fill="#ffffff" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" letter-spacing="1" opacity="0.95">CRATER-X</text>
+  <circle cx="90" cy="94" r="2.5" fill="#ffffff" opacity="0.85" />
+  <line x1="84" y1="94" x2="96" y2="94" stroke="#ffffff" stroke-width="0.75" opacity="0.85" />
+  <circle cx="150" cy="94" r="2.5" fill="#ffffff" opacity="0.85" />
+  <line x1="144" y1="94" x2="156" y2="94" stroke="#ffffff" stroke-width="0.75" opacity="0.85" />
+
+  <!-- Headset / ComLink Neural Lateral -->
+  <rect x="54" y="96" width="8" height="24" rx="4" fill="#ea580c" stroke="#ffffff" stroke-width="1" />
+  <rect x="178" y="96" width="8" height="24" rx="4" fill="#ea580c" stroke="#ffffff" stroke-width="1" />
+  
+  <!-- Microfone do ComLink -->
+  <path d="M58,116 Q66,142 96,144" fill="none" stroke="#fb923c" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="96" cy="144" r="3.5" fill="#fb923c" filter="url(#glow-tarek)" />
+
+  <!-- Insígnia da Colônia / Patente RedRide -->
+  <g transform="translate(106, 188)">
+    <circle cx="14" cy="14" r="13" fill="#0e0b0a" stroke="#ea580c" stroke-width="1.5" />
+    <text x="14" y="18" fill="#fb923c" font-family="sans-serif" font-size="10" font-weight="900" text-anchor="middle">T</text>
+  </g>
+
+  <!-- Status Online Pulsante -->
+  <circle cx="198" cy="42" r="7" fill="#10b981" filter="url(#glow-tarek)" />
+  <circle cx="198" cy="42" r="3.5" fill="#ffffff" />
+</svg>
