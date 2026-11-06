@@ -31,7 +31,7 @@ export async function POST(
         const now = Date.now();
         const nowIso = new Date(now).toISOString();
 
-        // 1. APROXIMAÇÃO -> EMBARQUE
+        // 1. APROXIMAÇÃO -> EMBARQUE (quando o rover chega ao ponto de embarque)
         if (ride.status === "approaching_pickup" && ride.pickup_eta) {
           const etaTime = new Date(ride.pickup_eta).getTime();
           if (now >= etaTime) {
@@ -49,30 +49,9 @@ export async function POST(
           }
         }
 
-        // 2. EMBARQUE -> DESLOCAMENTO
-        else if (ride.status === "boarding") {
-          // Embarque dura 4 segundos na simulação
-          const tripRoute = ride.trip_route as unknown as RoutePath;
-          const tripDurationSec = Math.max(
-            20,
-            Math.round((tripRoute?.length ?? 10) / 3.2)
-          );
-
-          await supabase
-            .from("rides")
-            .update({
-              status: "in_progress",
-              started_at: nowIso,
-            })
-            .eq("id", rideId);
-
-          await supabase.from("ride_events").insert({
-            ride_id: rideId,
-            event_type: "trip_started",
-            title: "Deslocamento iniciado",
-            description: `Navegando pela malha viária em direção ao destino (${tripDurationSec}s).`,
-          });
-        }
+        // 2. EMBARQUE: O rover aguarda no ponto de embarque até o passageiro clicar em
+        // "Embarcar no Rover e Iniciar Viagem" (acionado via /api/rides/[rideId]/fast-forward).
+        // Não auto-iniciamos aqui para dar controle ao usuário.
 
         // 3. DESLOCAMENTO -> CONCLUÍDA
         else if (ride.status === "in_progress" && ride.started_at) {
@@ -229,18 +208,6 @@ export async function POST(
           createdAt: nowIso,
         });
       }
-    } else if (ride.status === "boarding") {
-      ride.status = "in_progress";
-      ride.startedAt = nowIso;
-      mockStorage.saveRide(ride);
-      mockStorage.addEvent({
-        id: createId("evt"),
-        rideId,
-        type: "trip_started",
-        title: "Deslocamento iniciado",
-        description: "Rover em deslocamento autônomo para o destino.",
-        createdAt: nowIso,
-      });
     } else if (ride.status === "in_progress" && ride.startedAt) {
       const tripDurationSec = Math.max(20, Math.round((ride.tripRoute?.length ?? 10) / 3.2));
       if (now >= new Date(ride.startedAt).getTime() + tripDurationSec * 1000) {
